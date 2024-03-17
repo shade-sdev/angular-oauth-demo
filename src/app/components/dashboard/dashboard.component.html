@@ -1,0 +1,117 @@
+<div class="w-full h-full bg-gray-200">
+  <div class="flex flex-no-wrap">
+    <!-- Sidebar starts -->
+    <div class="absolute lg:relative w-64 {-- h-screen --} shadow bg-gray-100 hidden lg:block"
+         style="min-height: 700px">
+      <div class="h-16 w-full flex items-center px-8">
+        <p class="font-bold">Spring OAuth</p>
+      </div>
+      <ul class="py-6">
+        <li
+          class="pl-6 cursor-pointer text-sm leading-3 tracking-normal pb-4 pt-5 text-indigo-700 focus:text-indigo-700 focus:outline-none">
+          <div class="flex items-center">
+            <div>
+              <svg class="icon icon-tabler icon-tabler-grid" fill="none"
+                   height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                   viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" stroke="none"/>
+                <rect height="6" rx="1" width="6" x="4" y="4"/>
+                <rect height="6" rx="1" width="6" x="14" y="4"/>
+                <rect height="6" rx="1" width="6" x="4" y="14"/>
+                <rect height="6" rx="1" width="6" x="14" y="14"/>
+              </svg>
+            </div>
+            <a class="ml-2 text-gray-900">Dashboard</a>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+
+    <!-- Sidebar ends -->
+    <div class="w-full">
+      <!-- Navigation starts -->
+      <nav class="h-16 flex items-center lg:items-stretch justify-end lg:justify-between bg-white shadow relative z-10">
+        <div class="hidden lg:flex w-full pr-6">
+          <div class="w-1/2 h-full hidden lg:flex items-center pl-6 pr-24">
+            <div class="relative w-full">
+              <div class="text-gray-600 absolute ml-4 inset-0 m-auto w-4 h-4">
+                <svg class="bi bi-search" fill="currentColor" height="16" viewBox="0 0 16 16" width="16"
+                     xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                </svg>
+              </div>
+              <input
+                class="border border-gray-100 focus:outline-none focus:border-indigo-700 rounded w-full text-sm text-gray-600 placeholder-gray-600 bg-gray-100 pl-12 py-2"
+                placeholder="Search" type="text"/>
+            </div>
+          </div>
+          <div class="w-1/2 hidden lg:flex">
+            <div class="w-full flex items-center pl-8 justify-end">
+              <div class="flex items-center relative cursor-pointer">
+                <div class="rounded-full">
+                  <ul [ngClass]="profileDropdownHidden ? 'hidden' : ''"
+                      class="p-2 w-full border-r bg-white absolute rounded left-0 shadow mt-12 sm:mt-16">
+                    <li
+                      class="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center">
+                      <div class="flex items-center">
+                        <svg class="icon icon-tabler icon-tabler-user" fill="none" height="18"
+                             stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                             viewBox="0 0 24 24"
+                             width="18" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M0 0h24v24H0z" stroke="none"/>
+                          <circle cx="12" cy="7" r="4"/>
+                          <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"/>
+                        </svg>
+                        <a class="text-sm ml-2">My Profile</a>
+                      </div>
+                    </li>
+                    <li
+                      class="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center mt-2">
+                      <div class="flex items-center">
+                        <svg class="icon icon-tabler icon-tabler-logout" fill="none" height="20"
+                             stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                             viewBox="0 0 24 24"
+                             width="20" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M0 0h24v24H0z" stroke="none"/>
+                          <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"/>
+                          <path d="M7 12h14l-3 -3m0 6l3 -3"/>
+                        </svg>
+                        <button (click)="logout()" class="text-sm ml-2">Sign out</button>
+                      </div>
+                    </li>
+                  </ul>
+                  <div class="relative">
+                    <img alt="display avatar" class="rounded-full h-10 w-10 object-cover" role="img"
+                         src="{{me?.avatar}}"/>
+                    <div
+                      class="w-2 h-2 rounded-full bg-green-400 border border-white absolute inset-0 mb-0 mr-0 m-auto"></div>
+                  </div>
+                </div>
+                <p class="text-gray-800 text-sm mx-3">{{ me?.displayName }}</p>
+                <button (click)="profileDropdownHidden = !profileDropdownHidden" aria-label="open profile options"
+                        class="cursor-pointer text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-600">
+                  <img alt="down"
+                       src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_header_and_icons-svg6.svg">
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button aria-label="Main Menu"
+                class="text-gray-600 mr-8 visible lg:hidden relative focus:outline-none focus:ring-2 focus:ring-gray-600 "
+                id="menu">
+          <img alt="toggler" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_header_and_icons-svg7.svg">
+        </button>
+      </nav>
+
+      <div class="container mx-auto py-10 h-64 md:w-4/5 w-11/12 px-6">
+        <div class="w-full h-full rounded">
+          <!--  content here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
