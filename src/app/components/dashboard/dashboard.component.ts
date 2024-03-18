@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.httpClient.get<Me>("http://localhost:8080/me")
+    this.httpClient.get<Me>("http://localhost:8080/api/me")
       .subscribe({
         next: me => {
           this.me = me;
