@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
   }
 
   logout() {
-    this.httpClient.post("http://localhost:8080/logout", {}, {withCredentials: true}).subscribe({
+    this.httpClient.post("http://localhost:8080/logout", {}).subscribe({
       complete: () => {
         this.router.navigate(["login"]).then(value => value);
       },

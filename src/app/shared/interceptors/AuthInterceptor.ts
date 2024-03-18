@@ -1,9 +1,56 @@
-import {HttpInterceptorFn} from "@angular/common/http";
+import {
+  HttpClient,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+  HttpXsrfTokenExtractor
+} from "@angular/common/http";
+import {Injectable} from "@angular/core";
+import {Observable, switchMap, tap} from "rxjs";
 
-export const authInterceptor: HttpInterceptorFn = (request, next) => {
-  request = request.clone({
-    withCredentials: true
-  });
+@Injectable()
+export class AuthInterceptor implements HttpInterceptor {
 
-  return next(request);
-};
+  headerName = 'X-XSRF-TOKEN';
+  csrfToken: string | undefined;
+
+  constructor(private tokenExtractor: HttpXsrfTokenExtractor,
+              private http: HttpClient) {
+  }
+
+  intercept(
+    request: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+
+    this.csrfToken = this.tokenExtractor.getToken() as string;
+
+    if (!request.headers.has(this.headerName) && request.method == 'POST') {
+      return this.retrieveCsrfToken().pipe(
+        tap(response => {
+          this.csrfToken = response?.token;
+        }),
+        switchMap(_ => next.handle(request.clone({
+          headers: request.headers.set(this.headerName, this.csrfToken ?? ''),
+          withCredentials: true
+        })))
+      );
+    } else if (request.headers.has(this.headerName) && request.method == 'POST') {
+      request = request.clone({
+        headers: request.headers.set(this.headerName, this.csrfToken), withCredentials: true
+      });
+    } else {
+      request = request.clone({
+        withCredentials: true
+      });
+    }
+
+    return next.handle(request);
+  }
+
+  retrieveCsrfToken(): Observable<any> {
+    return this.http.get<any>('http://localhost:8080/csrf');
+  }
+
+}
