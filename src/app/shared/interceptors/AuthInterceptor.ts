@@ -12,7 +12,7 @@ import {Observable, switchMap, tap} from "rxjs";
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  headerName = 'X-XSRF-TOKEN';
+  headerName: string = 'X-XSRF-TOKEN';
   csrfToken: string | undefined;
 
   constructor(private tokenExtractor: HttpXsrfTokenExtractor,
