@@ -91,25 +91,21 @@
                 </div>
                 <p class="text-gray-800 text-sm mx-3">{{ me?.displayName }}</p>
                 <button (click)="profileDropdownHidden = !profileDropdownHidden" aria-label="open profile options"
-                        class="cursor-pointer text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-600">
-                  <img alt="down"
-                       src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_header_and_icons-svg6.svg">
+                        class="cursor-pointer text-gray-600 focus:outline-none">
+                  <svg class="bi bi-chevron-down" fill="#000" height="16" viewBox="0 0 16 16" width="16"
+                       xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
+                          fill-rule="evenodd"/>
+                  </svg>
                 </button>
               </div>
             </div>
           </div>
         </div>
-        <button aria-label="Main Menu"
-                class="text-gray-600 mr-8 visible lg:hidden relative focus:outline-none focus:ring-2 focus:ring-gray-600 "
-                id="menu">
-          <img alt="toggler" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_header_and_icons-svg7.svg">
-        </button>
       </nav>
 
-      <div class="container mx-auto py-10 h-64 md:w-4/5 w-11/12 px-6">
-        <div class="w-full h-full rounded">
-          <!--  content here -->
-        </div>
+      <div class="">
+        <app-profile-info-update></app-profile-info-update>
       </div>
     </div>
   </div>

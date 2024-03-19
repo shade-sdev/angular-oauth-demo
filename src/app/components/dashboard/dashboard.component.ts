@@ -3,12 +3,14 @@ import {HttpClient} from "@angular/common/http";
 import {Me} from "../../shared/services/model/me";
 import {NgClass} from "@angular/common";
 import {Router} from "@angular/router";
+import {ProfileInfoUpdateComponent} from "../profile/profile-info-update/profile-info-update.component";
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
-    NgClass
+    NgClass,
+    ProfileInfoUpdateComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'

@@ -26,7 +26,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     this.csrfToken = this.tokenExtractor.getToken() as string;
 
-    if (!request.headers.has(this.headerName) && request.method == 'POST') {
+    if (this.csrfToken == null && request.method == 'POST') {
       return this.retrieveCsrfToken().pipe(
         tap(response => {
           this.csrfToken = response?.token;
@@ -36,7 +36,7 @@ export class AuthInterceptor implements HttpInterceptor {
           withCredentials: true
         })))
       );
-    } else if (request.headers.has(this.headerName) && request.method == 'POST') {
+    } else if (this.csrfToken != null && request.method == 'POST') {
       request = request.clone({
         headers: request.headers.set(this.headerName, this.csrfToken), withCredentials: true
       });
