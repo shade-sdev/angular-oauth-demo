@@ -4,6 +4,7 @@ export interface Me {
   email: string;
   avatar: string;
   oauth2ProviderType: OAuth2ProviderType
+  authorities: Array<String>
 }
 
 export enum OAuth2ProviderType {
