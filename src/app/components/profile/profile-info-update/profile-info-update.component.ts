@@ -17,8 +17,7 @@ export class ProfileInfoUpdateComponent {
 
   constructor(private formBuilder: FormBuilder, private httpClient: HttpClient) {
     this.userFormGroup = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: [''],
+      username: ['', Validators.required],
       email: [''],
       phoneNumber: [''],
       dateOfBirth: [''],
@@ -27,7 +26,7 @@ export class ProfileInfoUpdateComponent {
   }
 
   saveUser() {
-    this.httpClient.post("http://localhost:8080/api/users", this.userFormGroup?.getRawValue())
+    this.httpClient.put("http://localhost:8080/api/users", this.userFormGroup?.getRawValue())
       .subscribe();
   }
 

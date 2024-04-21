@@ -26,7 +26,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     this.csrfToken = this.tokenExtractor.getToken() as string;
 
-    if (this.csrfToken == null && request.method == 'POST') {
+    if (this.csrfToken == null && ['POST', 'PUT', 'DELETE', 'PATCH'].includes(request.method)) {
       return this.retrieveCsrfToken().pipe(
         tap(response => {
           this.csrfToken = response?.token;

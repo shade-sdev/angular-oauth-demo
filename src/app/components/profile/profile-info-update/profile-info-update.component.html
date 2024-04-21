@@ -4,20 +4,13 @@
     data</h2>
 
   <form [formGroup]="userFormGroup">
-    <div class="mt-8 md:flex  items-center">
-      <div class="flex flex-col">
-        <label class="mb-3 text-sm leading-none text-gray-800">First name</label>
-        <input aria-label="Enter first name" class="w-80 bg-gray-100 text-sm font-medium leading-none text-gray-800 p-3 border rounded border-gray-200
-                  focus:outline-0 focus:ring-2 focus:ring-offset-1 focus:ring-indigo-700" formControlName="firstName" tabindex="0"
-               type="text"
-               value="William"/>
-      </div>
-      <div class="flex flex-col md:ml-12 md:mt-0 mt-8">
-        <label class="mb-3 text-sm leading-none text-gray-800">Last name</label>
-        <input aria-label="Enter last name" class="w-80 bg-gray-100 text-sm font-medium leading-none text-gray-800 p-3 border rounded border-gray-200
-                  focus:outline-0 focus:ring-2 focus:ring-offset-1 focus:ring-indigo-700" formControlName="lastName" tabindex="0"
-               type="text"
-               value="Smith"/>
+    <div class="mt-8 md:flex items-center">
+      <div class="flex flex-col w-full">
+        <label class="mb-3 text-sm leading-none text-gray-800">Username</label>
+        <input aria-label="Enter first name" class=" w-full bg-gray-100 text-sm font-medium leading-none text-gray-800 p-3 border rounded border-gray-200
+                  focus:outline-0 focus:ring-2 focus:ring-offset-1 focus:ring-indigo-700" formControlName="username"
+               tabindex="0"
+               type="text"/>
       </div>
     </div>
     <div class="mt-12 md:flex items-center">
