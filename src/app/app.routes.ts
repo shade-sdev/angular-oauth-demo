@@ -21,5 +21,9 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     loadComponent: () => DashboardComponent
+  },
+  {
+    path: 'user',
+    loadComponent: () => DashboardComponent
   }
 ];

@@ -36,7 +36,7 @@ export class AuthInterceptor implements HttpInterceptor {
           withCredentials: true
         })))
       );
-    } else if (this.csrfToken != null && request.method == 'POST') {
+    } else if (this.csrfToken != null && ['POST', 'PUT', 'DELETE', 'PATCH'].includes(request.method)) {
       request = request.clone({
         headers: request.headers.set(this.headerName, this.csrfToken), withCredentials: true
       });

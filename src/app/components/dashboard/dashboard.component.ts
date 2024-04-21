@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Me} from "../../shared/services/model/me";
-import {NgClass} from "@angular/common";
-import {Router} from "@angular/router";
+import {NgClass, NgForOf, NgIf} from "@angular/common";
+import {Router, RouterLink} from "@angular/router";
 import {ProfileInfoUpdateComponent} from "../profile/profile-info-update/profile-info-update.component";
 
 @Component({
@@ -10,7 +10,10 @@ import {ProfileInfoUpdateComponent} from "../profile/profile-info-update/profile
   standalone: true,
   imports: [
     NgClass,
-    ProfileInfoUpdateComponent
+    ProfileInfoUpdateComponent,
+    NgIf,
+    RouterLink,
+    NgForOf
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
@@ -20,8 +23,12 @@ export class DashboardComponent implements OnInit {
   me: Me | undefined;
   profileDropdownHidden: boolean = true;
 
+  route: string;
+
   constructor(private httpClient: HttpClient,
               private router: Router) {
+    this.route = this.router.url;
+    console.log(this.route);
   }
 
   ngOnInit(): void {

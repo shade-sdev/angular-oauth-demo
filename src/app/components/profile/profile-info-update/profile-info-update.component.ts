@@ -26,7 +26,7 @@ export class ProfileInfoUpdateComponent {
   }
 
   saveUser() {
-    this.httpClient.put("http://localhost:8080/api/users", this.userFormGroup?.getRawValue())
+    this.httpClient.put(`http://localhost:8080/api/users/${this.userFormGroup.get('username')?.value}`, this.userFormGroup?.getRawValue())
       .subscribe();
   }
 

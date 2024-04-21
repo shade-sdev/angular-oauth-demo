@@ -9,22 +9,39 @@
       <ul class="py-6">
         <li
           class="pl-6 cursor-pointer text-sm leading-3 tracking-normal pb-4 pt-5 text-indigo-700 focus:text-indigo-700 focus:outline-none">
-          <div class="flex items-center">
-            <div>
-              <svg class="icon icon-tabler icon-tabler-grid" fill="none"
-                   height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                   viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 0h24v24H0z" stroke="none"/>
-                <rect height="6" rx="1" width="6" x="4" y="4"/>
-                <rect height="6" rx="1" width="6" x="14" y="4"/>
-                <rect height="6" rx="1" width="6" x="4" y="14"/>
-                <rect height="6" rx="1" width="6" x="14" y="14"/>
-              </svg>
+          <a routerLink="/dashboard">
+            <div class="flex items-center">
+              <div>
+                <svg class="icon icon-tabler icon-tabler-grid" fill="none"
+                     height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                     viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 0h24v24H0z" stroke="none"/>
+                  <rect height="6" rx="1" width="6" x="4" y="4"/>
+                  <rect height="6" rx="1" width="6" x="14" y="4"/>
+                  <rect height="6" rx="1" width="6" x="4" y="14"/>
+                  <rect height="6" rx="1" width="6" x="14" y="14"/>
+                </svg>
+              </div>
+              <a class="ml-2 text-gray-900">Dashboard</a>
             </div>
-            <a class="ml-2 text-gray-900">Dashboard</a>
-          </div>
+          </a>
         </li>
-
+        <li
+          class="pl-6 cursor-pointer text-sm leading-3 tracking-normal pb-4 pt-5 text-black focus:outline-none">
+          <a routerLink="/user">
+            <div class="flex items-center">
+              <div>
+                <svg class="bi bi-person-circle" fill="currentColor" height="16" viewBox="0 0 16 16"
+                     width="16" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                  <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"
+                        fill-rule="evenodd"/>
+                </svg>
+              </div>
+              <a class="ml-2 text-gray-900">User</a>
+            </div>
+          </a>
+        </li>
       </ul>
     </div>
 
@@ -34,18 +51,7 @@
       <nav class="h-16 flex items-center lg:items-stretch justify-end lg:justify-between bg-white shadow relative z-10">
         <div class="hidden lg:flex w-full pr-6">
           <div class="w-1/2 h-full hidden lg:flex items-center pl-6 pr-24">
-            <div class="relative w-full">
-              <div class="text-gray-600 absolute ml-4 inset-0 m-auto w-4 h-4">
-                <svg class="bi bi-search" fill="currentColor" height="16" viewBox="0 0 16 16" width="16"
-                     xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-                </svg>
-              </div>
-              <input
-                class="border border-gray-100 focus:outline-none focus:border-indigo-700 rounded w-full text-sm text-gray-600 placeholder-gray-600 bg-gray-100 pl-12 py-2"
-                placeholder="Search" type="text"/>
-            </div>
+
           </div>
           <div class="w-1/2 hidden lg:flex">
             <div class="w-full flex items-center pl-8 justify-end">
@@ -94,8 +100,9 @@
                         class="cursor-pointer text-gray-600 focus:outline-none">
                   <svg class="bi bi-chevron-down" fill="#000" height="16" viewBox="0 0 16 16" width="16"
                        xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
-                          fill-rule="evenodd"/>
+                    <path
+                      d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
+                      fill-rule="evenodd"/>
                   </svg>
                 </button>
               </div>
@@ -104,7 +111,36 @@
         </div>
       </nav>
 
-      <div class="">
+      <div *ngIf="route.includes('/dashboard')" class="w-full md:w-1/2 lg:w-1/4 mx-auto mt-10">
+        <div class="bg-white  shadow rounded p-10">
+          <div class="pt-4 px-4 flex items-center justify-between pb-8">
+
+          </div>
+          <div class="flex justify-center w-full mb-3">
+            <div class="w-16 h-16 rounded border border-white dark:border-gray-700 shadow">
+              <img alt="boy avatar" class="focus:outline-none w-full h-full overflow-hidden object-cover rounded"
+                   src="{{me?.avatar}}" tabindex="0"/>
+            </div>
+          </div>
+          <h5 class="focus:outline-none mb-2 text-base text-gray-800 leading-4 font-normal tracking-normal text-center"
+              tabindex="0">{{ me?.displayName }}
+            / {{ me?.username }}</h5>
+          <p class="focus:outline-none mb-4 text-sm text-gray-600 dark:text-gray-400 leading-3 font-normal tracking-normal text-center"
+             tabindex="0">{{ me?.email }}</p>
+          <p
+            class="focus:outline-none mb-2 text-base text-gray-800 leading-4 font-medium tracking-normal text-center"> {{ me?.authProviderType }}</p>
+          <div class="container mx-auto grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 pt-6 gap-4">
+            <ng-container *ngFor="let authority of me?.authorities">
+              <div aria-label="gray background badge" class="focus:outline-none bg-gray-700 dark:bg-gray-800 h-6 w-40 mb-4 md:mb-0 rounded-md flex items-center justify-center"
+                   tabindex="0">
+                <span class="text-xs text-white whitespace-nowrap font-normal">{{ authority }}</span>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="route.includes('/user')">
         <app-profile-info-update></app-profile-info-update>
       </div>
     </div>
