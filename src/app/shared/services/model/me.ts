@@ -3,11 +3,13 @@ export interface Me {
   displayName: string;
   email: string;
   avatar: string;
-  oauth2ProviderType: OAuth2ProviderType
+  authProviderType: OAuth2ProviderType
   authorities: Array<String>
 }
 
 export enum OAuth2ProviderType {
   DISCORD,
-  GITHUB
+  GITHUB,
+  GOOGLE,
+  NON_OAUTH2_USER
 }

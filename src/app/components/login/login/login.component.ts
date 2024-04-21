@@ -1,11 +1,12 @@
 import {Component} from '@angular/core';
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [HttpClientModule],
+  imports: [HttpClientModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -13,7 +14,25 @@ export class LoginComponent {
 
   private oauthWindow: Window | null = null;
 
-  constructor(private router: Router) {
+  protected loginForm: FormGroup;
+
+  constructor(private router: Router, private formBuilder: FormBuilder, private httpClient: HttpClient) {
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    })
+  }
+
+  formLogin(): void {
+    const body = this.encodeFormData(this.loginForm.getRawValue());
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/x-www-form-urlencoded');
+    this.httpClient.post('http://localhost:8080/form-login', body, {headers: headers})
+      .subscribe({
+        complete: () => {
+          this.router.navigate(['/dashboard']).then(r => r);
+        }
+      })
   }
 
   login(provider: string): void {
@@ -42,6 +61,18 @@ export class LoginComponent {
     } catch (e) {
       // not redirected to same origin yet
     }
+  }
+
+  private encodeFormData(data: any): string {
+    const params = new URLSearchParams();
+
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        params.set(key, data[key]);
+      }
+    }
+
+    return params.toString();
   }
 
 }
