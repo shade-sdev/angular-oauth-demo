@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Me} from "../../shared/services/model/me";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {Router, RouterLink} from "@angular/router";
 import {ProfileInfoUpdateComponent} from "../profile/profile-info-update/profile-info-update.component";
+import {HotToastService} from "@ngneat/hot-toast";
+import {ResponseMessage} from "../../shared/services/model/ResponseMessage";
 
 @Component({
   selector: 'app-dashboard',
@@ -26,7 +28,8 @@ export class DashboardComponent implements OnInit {
   route: string;
 
   constructor(private httpClient: HttpClient,
-              private router: Router) {
+              private router: Router,
+              private alertService: HotToastService) {
     this.route = this.router.url;
     console.log(this.route);
   }
@@ -37,7 +40,65 @@ export class DashboardComponent implements OnInit {
         next: me => {
           this.me = me;
         },
-        error: () => {
+        error: (err: HttpErrorResponse) => {
+          this.alertService.error(err.status.toString(), {autoClose: true, position: 'top-right', dismissible: true});
+        },
+        complete: () => {
+        }
+      })
+  }
+
+  discord() {
+    this.httpClient.get<ResponseMessage>("http://localhost:8080/api/discord")
+      .subscribe({
+        next: response => {
+          this.alertService.success(response.message, {
+            autoClose: true,
+            duration: 5000,
+            position: 'top-right',
+            dismissible: true
+          });
+        },
+        error: (err: HttpErrorResponse) => {
+          this.alertService.error(err.status.toString(), {autoClose: true, position: 'top-right', dismissible: true});
+        },
+        complete: () => {
+        }
+      })
+  }
+
+  admin() {
+    this.httpClient.get<ResponseMessage>("http://localhost:8080/api/admin")
+      .subscribe({
+        next: response => {
+          this.alertService.success(response.message, {
+            autoClose: true,
+            duration: 5000,
+            position: 'top-right',
+            dismissible: true
+          });
+        },
+        error: (err: HttpErrorResponse) => {
+          this.alertService.error(err.status.toString(), {autoClose: true, position: 'top-right', dismissible: true});
+        },
+        complete: () => {
+        }
+      })
+  }
+
+  user() {
+    this.httpClient.get<ResponseMessage>("http://localhost:8080/api/user")
+      .subscribe({
+        next: response => {
+          this.alertService.success(response.message, {
+            autoClose: true,
+            duration: 5000,
+            position: 'top-right',
+            dismissible: true
+          });
+        },
+        error: (err: HttpErrorResponse) => {
+          this.alertService.error(err.status.toString(), {autoClose: true, position: 'top-right', dismissible: true});
         },
         complete: () => {
         }

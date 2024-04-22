@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {HotToastService} from "@ngneat/hot-toast";
 
 @Component({
   selector: 'app-profile-info-update',
@@ -15,7 +16,10 @@ export class ProfileInfoUpdateComponent {
 
   public userFormGroup: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private httpClient: HttpClient) {
+  constructor(private formBuilder: FormBuilder,
+              private httpClient: HttpClient,
+              private alertService: HotToastService
+  ) {
     this.userFormGroup = this.formBuilder.group({
       username: ['', Validators.required],
       email: [''],
@@ -27,7 +31,11 @@ export class ProfileInfoUpdateComponent {
 
   saveUser() {
     this.httpClient.put(`http://localhost:8080/api/users/${this.userFormGroup.get('username')?.value}`, this.userFormGroup?.getRawValue())
-      .subscribe();
+      .subscribe({
+        error: (err: HttpErrorResponse) => {
+          this.alertService.error(err.status.toString(), {autoClose: true, position: 'top-right', dismissible: true});
+        }
+      });
   }
 
 }
