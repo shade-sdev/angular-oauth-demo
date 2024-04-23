@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
           this.me = me;
         },
         error: (err: HttpErrorResponse) => {
-          this.alertService.error(err.status.toString(), {autoClose: true, position: 'top-right', dismissible: true});
+          this.alertService.error("429", {autoClose: true, position: 'top-right', dismissible: true});
         },
         complete: () => {
         }
